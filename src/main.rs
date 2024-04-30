@@ -1,11 +1,3 @@
-/*
-The purpose of this program is to prompt the user for the day's blossom parameters and to try to find the highest score
-Blossom is found at: https://www.merriam-webster.com/games/blossom-word-game
-
-Author: Luka Wilmink
-*/
-
-use std::collections::BTreeMap;
 use std::io;
 use std::fs;
 
@@ -25,7 +17,6 @@ fn main() {
     let _ = stdin.read_line(input);
     //getting Vec of chars from string
     let mut letters: Vec<char> = input.chars().collect();
-    letters.pop();
 
     //prompt and parse the center letter, which must be used in every word
     //e.g. "a"
@@ -37,15 +28,16 @@ fn main() {
 
     //create a new Vec<char> that has all letters except the center
     let mut petal_letters: Vec<char> = vec![];
-    for &letter in &letters {
-        if letter != must_use {petal_letters.push(letter);}
+    for letter in letters.clone() {
+        if !letter.is_alphabetic() {letters.pop();}
+        else if letter != must_use {petal_letters.push(letter);}
     }
 
     //string vec to hold valid words found
     let mut valid_wordlist: Vec<&str> = vec![];
 
     //binary tree to hold words sorted by their score
-    let mut word_scores: BTreeMap<i32, &str> = BTreeMap::new();
+    let mut word_scores: Vec<(&str, i32)> = Vec::new();
 
     //first for loop to find the valid wordlist from the letters given
     for word in wordlist.split_whitespace() {
@@ -76,15 +68,19 @@ fn main() {
             let mut score = score_word(word, petal);
 
             //add 7 if each letter is used
-            if pangram(word, letters.clone()) {score += 7;};
+            if pangram(word, &letters) {score += 7;};
 
             //add score and word pair to the binary tree map
-            word_scores.insert(score, word);
+            if score > 30 {word_scores.push((word, score));}
+            
         }
+
+        word_scores.sort_by(|&(_, a), &(_, b)| b.cmp(&a));
 
         println!("{:?}", word_scores);
         word_scores.clear();
-    }    
+    }
+
 
 }
 
@@ -110,9 +106,9 @@ fn score_word(word: &str, glowing: char) -> i32 {
 }
 
 //checks if each character in letters is used in the given word
-fn pangram(word: &str, letters: Vec<char>) -> bool {
+fn pangram(word: &str, letters: &Vec<char>) -> bool {
     for letter in letters {
-        if !word.contains(letter) {return false;}
+        if !word.contains(*letter) {return false;}
     }
     return true;
 }
