@@ -5,7 +5,8 @@ Blossom can be found at: https://www.merriam-webster.com/games/blossom-word-game
 
 ## Usage
 1. clone this repository
-2. open the repo's directory in terminal
-3. execute `cargo run`
-4. follow the prompts
-5. profit?
+2. ensure Rust is installed
+3. open the repo's directory in terminal
+4. execute `cargo run`
+5. follow the prompts
+6. profit?
