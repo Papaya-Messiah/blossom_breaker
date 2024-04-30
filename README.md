@@ -1,3 +1,11 @@
-The purpose of this program is to prompt the user for the day's blossom parameters and to try to find the highest score
+# Blossom Breaker
+A small program in Rust to find optimal words for use in Merriam Webster's "Blossom" daily game.
 
-Blossom is found at: https://www.merriam-webster.com/games/blossom-word-game
+Blossom can be found at: https://www.merriam-webster.com/games/blossom-word-game
+
+## Usage
+1. clone this repository
+2. open the repo's directory in terminal
+3. execute `cargo run`
+4. follow the prompts
+5. profit?
