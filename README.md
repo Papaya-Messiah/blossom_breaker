@@ -9,3 +9,11 @@ Blossom can be found at: https://www.merriam-webster.com/games/blossom-word-game
 3. execute `cargo run`
 4. follow the prompts
 5. profit?
+
+### Notes
+- The wordlist is in progress and being updated, many words may not be valid at the moment
+- The words are sorted by letter and then by point value
+
+### Planned features
+- Help the user determine optimal word input order
+- Live display that removes words used and can dynamically update the wordlist with invalid words
